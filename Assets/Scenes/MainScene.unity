@@ -3230,6 +3230,7 @@ GameObject:
   - component: {fileID: 9133689141344677421}
   - component: {fileID: 6567879760112147390}
   - component: {fileID: 969384070935728849}
+  - component: {fileID: 9133689141344677422}
   m_Layer: 0
   m_Name: basic_enemy_wheels_back
   m_TagString: Untagged
@@ -3397,6 +3398,7 @@ GameObject:
   - component: {fileID: 2095316225972562437}
   - component: {fileID: 302438301862206769}
   - component: {fileID: 5327409104736864334}
+  - component: {fileID: 6350958158210765759}
   m_Layer: 0
   m_Name: basic_enemy_wheels_front
   m_TagString: Untagged
@@ -3404,6 +3406,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6350958158210765759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350958158210765758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f014cee2b1b66d4ca263268c6c07ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateObject
+  rotationVector: {x: 1, y: 0, z: 0}
+  rotationSpeed: 3.5
 --- !u!33 &6567879760112147390
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3519,6 +3535,7 @@ GameObject:
   - component: {fileID: 2984942311089354613}
   - component: {fileID: 8310500483047487413}
   - component: {fileID: 8084547977277200057}
+  - component: {fileID: 8310500483047487414}
   m_Layer: 0
   m_Name: fast_enemy_wheels
   m_TagString: Untagged
@@ -3605,6 +3622,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7665077863198676156}
   m_Mesh: {fileID: 3549018140181674011, guid: a1d5df2d7cc32da498543ba155a3e0c9, type: 3}
+--- !u!114 &8310500483047487414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665077863198676156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f014cee2b1b66d4ca263268c6c07ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateObject
+  rotationVector: {x: 1, y: 0, z: 0}
+  rotationSpeed: 7
 --- !u!1 &8887553275403037342
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,6 +3669,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4714160597514571095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9133689141344677422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480762249969912943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f014cee2b1b66d4ca263268c6c07ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotateObject
+  rotationVector: {x: 1, y: 0, z: 0}
+  rotationSpeed: 3.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
