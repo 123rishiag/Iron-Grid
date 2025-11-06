@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+
+        // So that faster enemy always have more priority than slow
+        // and goes around it without disturbing it
+        agent.avoidancePriority = Mathf.RoundToInt(agent.speed * 10);
     }
 
     private void Start()
