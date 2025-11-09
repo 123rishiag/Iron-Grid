@@ -3,10 +3,11 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float turnSpeed = 10f;
+
     private NavMeshAgent agent;
 
-    [SerializeField] private float turnSpeed = 10f;
-    [SerializeField] private Transform[] waypoints;
+    private Transform[] waypoints;
     private int waypointIndex;
 
     private void Awake()
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        waypoints = FindFirstObjectByType<WaypointManager>().GetWaypoints();
         waypointIndex = 0;
     }
 
