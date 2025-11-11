@@ -1159,9 +1159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7d9c4f90a132b41aae6868914d3eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  spawnCooldown: 3
+  currentWave:
+    basicEnemy: 4
+    fastEnemy: 2
   respawnTransform: {fileID: 3900967040342316923}
+  spawnCooldown: 3
   basicEnemy: {fileID: 1543003267658841180, guid: 45014fc05a189d949b2e145d04d6ea79, type: 3}
+  fastEnemy: {fileID: 3032306880265412725, guid: 61e76addb5fbbdf43a8805c4e40e9243, type: 3}
 --- !u!1 &508114158
 GameObject:
   m_ObjectHideFlags: 0
