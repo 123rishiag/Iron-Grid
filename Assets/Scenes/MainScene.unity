@@ -495,11 +495,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 252016950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362bbae2ca8332b47a8fe4a6a58336ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7c6261c39a0114d9db75d48869d2ae, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tower
+  m_EditorClassIdentifier: Assembly-CSharp::Tower_Crossbow
   currentEnemy: {fileID: 0}
-  towerHead: {fileID: 7786341365313022804}
+  attackCooldown: 1
+  towerHead: {fileID: 3355134262223178547}
   rotationSpeed: 10
   attackRange: 3
   whatIsEnemy:
