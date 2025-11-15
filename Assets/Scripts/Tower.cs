@@ -88,6 +88,11 @@ public class Tower : MonoBehaviour
         towerHead.rotation = Quaternion.Euler(rotation);
     }
 
+    protected Vector3 DirectionToEnemyFrom(Transform startPoint)
+    {
+        return (currentEnemy.position - startPoint.position).normalized;
+    }
+
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, attackRange);
