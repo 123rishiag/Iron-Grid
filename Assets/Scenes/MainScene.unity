@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tower_Crossbow
   currentEnemy: {fileID: 0}
-  attackCooldown: 1
+  attackCooldown: 2
   towerHead: {fileID: 3355134262223178547}
   rotationSpeed: 10
   attackRange: 3
@@ -522,6 +522,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Crossbow_Visuals
   attackVisuals: {fileID: 1512895338}
   attackVisualDuration: 0.1
+  meshRenderer: {fileID: 9007367792730704475}
+  material: {fileID: 0}
+  currentIntensity: 0
+  maxIntensity: 150
+  startColor: {r: 0, g: 0, b: 0, a: 1}
+  endColor: {r: 0.047058824, g: 0.7607843, b: 0.7921569, a: 1}
 --- !u!1 &257662462
 GameObject:
   m_ObjectHideFlags: 0
