@@ -11,9 +11,15 @@ public class Tower : MonoBehaviour
     [Header("Tower Setup")]
     [SerializeField] protected Transform towerHead;
     [SerializeField] protected float rotationSpeed = 10f;
+    private bool canRotate;
 
     [SerializeField] protected float attackRange = 3f;
     [SerializeField] protected LayerMask whatIsEnemy;
+
+    public virtual void Awake()
+    {
+
+    }
 
     protected virtual void Update()
     {
@@ -72,8 +78,18 @@ public class Tower : MonoBehaviour
         return possibleTargets[randomIndex];
     }
 
+    public void EnableRotation(bool enable)
+    {
+        canRotate = enable;
+    }
+
     protected virtual void RotateTowardsEnemy()
     {
+        if(!canRotate)
+        {
+            return; 
+        }
+
         if(currentEnemy == null)
         {
             return;
