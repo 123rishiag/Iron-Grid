@@ -16,6 +16,11 @@ public class Crossbow_Visuals : MonoBehaviour
     [SerializeField] private Color startColor;
     [SerializeField] private Color endColor;
 
+    [Header("Rotor Visuals")]
+    [SerializeField] private Transform rotor;
+    [SerializeField] private Transform rotorUnloaded;
+    [SerializeField] private Transform rotorLoaded;
+
     [Header("Front Glow String")]
     [SerializeField] private LineRenderer frontString_L;
     [SerializeField] private LineRenderer frontString_R;
@@ -36,6 +41,8 @@ public class Crossbow_Visuals : MonoBehaviour
     [SerializeField] private Transform backEndPoint_L;
     [SerializeField] private Transform backEndPoint_R;
 
+    [SerializeField] private LineRenderer[] lineRenderers;
+
     private Tower_Crossbow myTower;
     private Material material;
     private float currentIntensity;
@@ -43,18 +50,30 @@ public class Crossbow_Visuals : MonoBehaviour
     private void Awake()
     {
         myTower = GetComponent<Tower_Crossbow>();
-
         material = new Material(meshRenderer.material);
-
         meshRenderer.material = material;
 
+        UpdateMaterialsOnlineRenderers();
+
         StartCoroutine(ChangeEmission(1));
+    }
+
+    private void UpdateMaterialsOnlineRenderers()
+    {
+        foreach (var lr in lineRenderers)
+        {
+            lr.material = material;
+        }
     }
 
     private void Update()
     {
         UpdateEmissionColor();
+        UpdateStrings();
+    }
 
+    private void UpdateStrings()
+    {
         UpdateStringVisual(frontString_L, frontStartPoint_L, frontEndPoint_L);
         UpdateStringVisual(frontString_R, frontStartPoint_R, frontEndPoint_R);
         UpdateStringVisual(backString_L, backStartPoint_L, backEndPoint_L);
@@ -72,7 +91,11 @@ public class Crossbow_Visuals : MonoBehaviour
 
     public void PlayReloadVFX(float duration)
     {
-        StartCoroutine(ChangeEmission(duration / 2));
+        // To Visually reload the gun, before its reloaded
+        float newDuration = duration / 2;
+
+        StartCoroutine(ChangeEmission(newDuration));
+        StartCoroutine(UpdateRotorPosition(newDuration));
     }
 
     public void PlayAttackVFX(Vector3 startPoint, Vector3 endPoint)
@@ -110,6 +133,22 @@ public class Crossbow_Visuals : MonoBehaviour
         }
 
         currentIntensity = maxIntensity;
+    }
+
+    private IEnumerator UpdateRotorPosition(float duration)
+    {
+        float startTime = Time.time;
+
+        // Do something repeatedly until the duration has passed
+        while (Time.time - startTime < duration)
+        {
+            // Calculates the proportion of the duration that has elapsed since the start of the coroutine.
+            float tValue = (Time.time - startTime) / duration;
+            rotor.position = Vector3.Lerp(rotorUnloaded.position, rotorLoaded.position, tValue);
+            yield return null;
+        }
+
+        rotor.position = rotorLoaded.position;
     }
 
     private void UpdateStringVisual(LineRenderer lineRenderer, Transform startPoint, Transform endPoint)
