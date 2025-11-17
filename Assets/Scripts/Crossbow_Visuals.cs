@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Crossbow_Visuals : MonoBehaviour
@@ -14,6 +15,26 @@ public class Crossbow_Visuals : MonoBehaviour
     [Space]
     [SerializeField] private Color startColor;
     [SerializeField] private Color endColor;
+
+    [Header("Front Glow String")]
+    [SerializeField] private LineRenderer frontString_L;
+    [SerializeField] private LineRenderer frontString_R;
+
+    [Space]
+    [SerializeField] private Transform frontStartPoint_L;
+    [SerializeField] private Transform frontStartPoint_R;
+    [SerializeField] private Transform frontEndPoint_L;
+    [SerializeField] private Transform frontEndPoint_R;
+
+    [Header("Back Glow String")]
+    [SerializeField] private LineRenderer backString_L;
+    [SerializeField] private LineRenderer backString_R;
+
+    [Space]
+    [SerializeField] private Transform backStartPoint_L;
+    [SerializeField] private Transform backStartPoint_R;
+    [SerializeField] private Transform backEndPoint_L;
+    [SerializeField] private Transform backEndPoint_R;
 
     private Tower_Crossbow myTower;
     private Material material;
@@ -33,6 +54,11 @@ public class Crossbow_Visuals : MonoBehaviour
     private void Update()
     {
         UpdateEmissionColor();
+
+        UpdateStringVisual(frontString_L, frontStartPoint_L, frontEndPoint_L);
+        UpdateStringVisual(frontString_R, frontStartPoint_R, frontEndPoint_R);
+        UpdateStringVisual(backString_L, backStartPoint_L, backEndPoint_L);
+        UpdateStringVisual(backString_R, backStartPoint_R, backEndPoint_R);
     }
 
     private void UpdateEmissionColor()
@@ -84,5 +110,11 @@ public class Crossbow_Visuals : MonoBehaviour
         }
 
         currentIntensity = maxIntensity;
+    }
+
+    private void UpdateStringVisual(LineRenderer lineRenderer, Transform startPoint, Transform endPoint)
+    {
+        lineRenderer.SetPosition(0, startPoint.position);
+        lineRenderer.SetPosition(1, endPoint.position);
     }
 }
