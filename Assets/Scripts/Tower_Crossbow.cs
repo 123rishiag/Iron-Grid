@@ -3,6 +3,7 @@ using UnityEngine;
 public class Tower_Crossbow : Tower
 {
     [Header("Crossbow Details")]
+    [SerializeField] private int damage = 10;
     [SerializeField] private Transform gunPoint;
 
     private Crossbow_Visuals visuals;
@@ -22,11 +23,15 @@ public class Tower_Crossbow : Tower
         {
             towerHead.forward = directionToEnemy;
 
-            Debug.Log(hitInfo.collider.gameObject.name + " was attacked!");
-            Debug.DrawLine(gunPoint.position, hitInfo.point);
-
             visuals.PlayAttackVFX(gunPoint.position, hitInfo.point);
             visuals.PlayReloadVFX(attackCooldown);
+
+            IDamagable damagable = hitInfo.transform.GetComponent<IDamagable>();
+
+            if (damagable != null)
+            {
+                damagable.TakeDamage(damage);
+            }
         }
     }
 }
