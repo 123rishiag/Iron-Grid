@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour, IDamagable
     private Transform[] waypoints;
     private int waypointIndex;
 
+    private float totalDistance;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -27,6 +29,8 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         waypoints = FindFirstObjectByType<WaypointManager>().GetWaypoints();
         waypointIndex = 0;
+
+        CollectTotalDistance();
     }
 
     private void Update()
@@ -38,6 +42,17 @@ public class Enemy : MonoBehaviour, IDamagable
         {
             // Set the destination to next waypoint
             agent.SetDestination(GetNextWaypoint());
+        }
+    }
+
+    public float DistanceToFinishLine() => totalDistance + agent.remainingDistance;
+
+    private void CollectTotalDistance()
+    {
+        for (int i = 0; i < waypoints.Length - 1; ++i)
+        {
+            float distance = Vector3.Distance(waypoints[i].position, waypoints[i + 1].position);
+            totalDistance = totalDistance + distance;
         }
     }
 
@@ -61,13 +76,26 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private Vector3 GetNextWaypoint()
     {
+        // Check if the waypoint index is beyond the last waypoint
         if (waypointIndex >= waypoints.Length)
         {
+            // If true, return the agent's current position, effectively stopping it
+            // Uncomment the line below to loop the waypoints
             // waypointIndex = 0;
             return transform.position;
         }
 
+        // Get the current target point from the waypoints array
         Vector3 targetPoint = waypoints[waypointIndex].position;
+
+        // If this is not the first waypoint, calculate the distance from the previous waypoint
+        if(waypointIndex > 0)
+        {
+            float distance = Vector3.Distance(waypoints[waypointIndex].position, waypoints[waypointIndex - 1].position);
+            // Subtract this distance from the total distance
+            totalDistance = totalDistance - distance;
+        }
+
         ++waypointIndex;
 
         return targetPoint;
