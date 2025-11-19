@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
+    [SerializeField] private Transform centerPoint;
     public int healthPoints = 4;
 
     [Header("Movement")]
@@ -100,6 +101,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
         return targetPoint;
     }
+
+    public Vector3 CenterPoint() => centerPoint.position;
 
     public void TakeDamage(int damage)
     {

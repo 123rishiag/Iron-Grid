@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     [Space]
     [Header("Spawn Details")]
     [SerializeField] private Transform respawnTransform;
-    [SerializeField] private float spawnCooldown = 3f;
+    [SerializeField] private float spawnCooldown = 1f;
     [Space]
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject basicEnemy;

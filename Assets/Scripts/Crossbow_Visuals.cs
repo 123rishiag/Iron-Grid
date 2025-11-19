@@ -44,6 +44,7 @@ public class Crossbow_Visuals : MonoBehaviour
     [SerializeField] private LineRenderer[] lineRenderers;
 
     private Tower_Crossbow myTower;
+    private Enemy myEnemy;
     private Material material;
     private float currentIntensity;
 
@@ -70,6 +71,11 @@ public class Crossbow_Visuals : MonoBehaviour
     {
         UpdateEmissionColor();
         UpdateStrings();
+
+        if(attackVisuals.enabled && myEnemy != null)
+        {
+            attackVisuals.SetPosition(1, myEnemy.CenterPoint());
+        }
     }
 
     private void UpdateStrings()
@@ -105,7 +111,8 @@ public class Crossbow_Visuals : MonoBehaviour
 
     private IEnumerator VFXCoroutine(Vector3 startPoint, Vector3 endPoint)
     {
-        myTower.EnableRotation(false);
+        // myTower.EnableRotation(false);
+        myEnemy = myTower.currentEnemy;
 
         attackVisuals.enabled = true;
         attackVisuals.SetPosition(0, startPoint);
@@ -115,7 +122,7 @@ public class Crossbow_Visuals : MonoBehaviour
 
         attackVisuals.enabled = false;
 
-        myTower.EnableRotation(true);
+        // myTower.EnableRotation(true);
     }
 
     private IEnumerator ChangeEmission(float duration)
