@@ -3,7 +3,7 @@ using UnityEngine;
 public class Tower_Crossbow : Tower
 {
     [Header("Crossbow Details")]
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 0;
     [SerializeField] private Transform gunPoint;
 
     private Crossbow_Visuals visuals;

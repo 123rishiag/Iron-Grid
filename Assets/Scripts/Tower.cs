@@ -23,9 +23,9 @@ public class Tower : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(currentEnemy == null)
+        if (currentEnemy == null)
         {
-            currentEnemy = FindRandomEnemyWithinRange();
+            currentEnemy = FindMostAdvancedEnemyWithinRange();
             return;
         }
 
@@ -34,7 +34,7 @@ public class Tower : MonoBehaviour
             Attack();
         }
 
-        if(Vector3.Distance(currentEnemy.position, transform.position) > attackRange)
+        if (Vector3.Distance(currentEnemy.position, transform.position) > attackRange)
         {
             currentEnemy = null;
         }
@@ -58,24 +58,42 @@ public class Tower : MonoBehaviour
         return false;
     }
 
-    protected Transform FindRandomEnemyWithinRange()
+    protected Transform FindMostAdvancedEnemyWithinRange()
     {
-        List<Transform> possibleTargets = new List<Transform>();
+        List<Enemy> possibleTargets = new List<Enemy>();
 
         Collider[] enemiesAround = Physics.OverlapSphere(transform.position, attackRange, whatIsEnemy);
         foreach (Collider enemy in enemiesAround)
         {
-            possibleTargets.Add(enemy.transform);
+            Enemy newEnemy = enemy.GetComponent<Enemy>();
+            possibleTargets.Add(newEnemy);
         }
 
-        if (possibleTargets.Count <= 0)
+        Enemy newTarget = GetMostAdvancedEnemy(possibleTargets);
+
+        if (newTarget != null)
         {
-            return null;
+            return newTarget.transform;
         }
 
-        int randomIndex = Random.Range(0, possibleTargets.Count);
+        return null;
+    }
 
-        return possibleTargets[randomIndex];
+    private Enemy GetMostAdvancedEnemy(List<Enemy> targets)
+    {
+        Enemy mostAdvancedEnemy = null;
+        float minRemainingDistance = float.MaxValue;
+        foreach (Enemy enemy in targets)
+        {
+            float remainingDistance = enemy.DistanceToFinishLine();
+            if (remainingDistance < minRemainingDistance)
+            {
+                minRemainingDistance = remainingDistance;
+                mostAdvancedEnemy = enemy;
+            }
+        }
+
+        return mostAdvancedEnemy;
     }
 
     public void EnableRotation(bool enable)
@@ -85,12 +103,12 @@ public class Tower : MonoBehaviour
 
     protected virtual void RotateTowardsEnemy()
     {
-        if(!canRotate)
+        if (!canRotate)
         {
-            return; 
+            return;
         }
 
-        if(currentEnemy == null)
+        if (currentEnemy == null)
         {
             return;
         }
