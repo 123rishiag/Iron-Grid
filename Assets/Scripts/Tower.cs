@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public Transform currentEnemy;
+    public Enemy currentEnemy;
 
     [SerializeField] protected float attackCooldown = 1f;
     protected float lastTimeAttacked;
@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
 
     public virtual void Awake()
     {
-
+        EnableRotation(true);
     }
 
     protected virtual void Update()
@@ -34,7 +34,7 @@ public class Tower : MonoBehaviour
             Attack();
         }
 
-        if (Vector3.Distance(currentEnemy.position, transform.position) > attackRange)
+        if (Vector3.Distance(currentEnemy.CenterPoint(), transform.position) > attackRange)
         {
             currentEnemy = null;
         }
@@ -58,7 +58,7 @@ public class Tower : MonoBehaviour
         return false;
     }
 
-    protected Transform FindMostAdvancedEnemyWithinRange()
+    protected Enemy FindMostAdvancedEnemyWithinRange()
     {
         List<Enemy> possibleTargets = new List<Enemy>();
 
@@ -73,7 +73,7 @@ public class Tower : MonoBehaviour
 
         if (newTarget != null)
         {
-            return newTarget.transform;
+            return newTarget;
         }
 
         return null;
@@ -113,7 +113,7 @@ public class Tower : MonoBehaviour
             return;
         }
 
-        Vector3 directionToEnemy = currentEnemy.position - towerHead.position;
+        Vector3 directionToEnemy = DirectionToEnemyFrom(towerHead);
 
         Quaternion lookRotation = Quaternion.LookRotation(directionToEnemy);
 
@@ -124,7 +124,7 @@ public class Tower : MonoBehaviour
 
     protected Vector3 DirectionToEnemyFrom(Transform startPoint)
     {
-        return (currentEnemy.position - startPoint.position).normalized;
+        return (currentEnemy.CenterPoint() - startPoint.position).normalized;
     }
 
     protected virtual void OnDrawGizmos()
