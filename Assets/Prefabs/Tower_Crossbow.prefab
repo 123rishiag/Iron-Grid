@@ -1749,13 +1749,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower_Crossbow
   currentEnemy: {fileID: 0}
   attackCooldown: 1.2
-  enemyPriorityType: 1
+  enemyPriorityType: 2
   towerHead: {fileID: 8785848578267832973}
   rotationSpeed: 10
   attackRange: 3
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  dynamicTargetChange: 0
   damage: 2
   gunPoint: {fileID: 3606827131310453678}
 --- !u!114 &7788366914500826649
