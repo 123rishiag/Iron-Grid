@@ -43,19 +43,16 @@ public class Crossbow_Visuals : MonoBehaviour
 
     [SerializeField] private LineRenderer[] lineRenderers;
 
-    private Tower_Crossbow myTower;
     private Enemy myEnemy;
     private Material material;
     private float currentIntensity;
 
     private void Awake()
     {
-        myTower = GetComponent<Tower_Crossbow>();
         material = new Material(meshRenderer.material);
         meshRenderer.material = material;
 
         UpdateMaterialsOnlineRenderers();
-
         StartCoroutine(ChangeEmission(1));
     }
 
@@ -71,8 +68,12 @@ public class Crossbow_Visuals : MonoBehaviour
     {
         UpdateEmissionColor();
         UpdateStrings();
+        UpdateAttackVisualsIfNeeded();
+    }
 
-        if(attackVisuals.enabled && myEnemy != null)
+    private void UpdateAttackVisualsIfNeeded()
+    {
+        if (attackVisuals.enabled && myEnemy != null)
         {
             attackVisuals.SetPosition(1, myEnemy.CenterPoint());
         }
@@ -104,15 +105,14 @@ public class Crossbow_Visuals : MonoBehaviour
         StartCoroutine(UpdateRotorPosition(newDuration));
     }
 
-    public void PlayAttackVFX(Vector3 startPoint, Vector3 endPoint)
+    public void PlayAttackVFX(Vector3 startPoint, Vector3 endPoint, Enemy newEnemy)
     {
-        StartCoroutine(VFXCoroutine(startPoint, endPoint));
+        StartCoroutine(VFXCoroutine(startPoint, endPoint, newEnemy));
     }
 
-    private IEnumerator VFXCoroutine(Vector3 startPoint, Vector3 endPoint)
+    private IEnumerator VFXCoroutine(Vector3 startPoint, Vector3 endPoint, Enemy newEnemy)
     {
-        // myTower.EnableRotation(false);
-        myEnemy = myTower.currentEnemy;
+        myEnemy = newEnemy;
 
         attackVisuals.enabled = true;
         attackVisuals.SetPosition(0, startPoint);
@@ -121,8 +121,6 @@ public class Crossbow_Visuals : MonoBehaviour
         yield return new WaitForSeconds(attackVisualDuration);
 
         attackVisuals.enabled = false;
-
-        // myTower.EnableRotation(true);
     }
 
     private IEnumerator ChangeEmission(float duration)
