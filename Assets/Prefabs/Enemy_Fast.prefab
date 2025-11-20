@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0619d75d5cae648b04604b84f555af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  enemyType: 1
   centerPoint: {fileID: 1744449411078772155}
   healthPoints: 4
   turnSpeed: 10

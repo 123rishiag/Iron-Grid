@@ -1749,6 +1749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tower_Crossbow
   currentEnemy: {fileID: 0}
   attackCooldown: 1.2
+  enemyPriorityType: 1
   towerHead: {fileID: 8785848578267832973}
   rotationSpeed: 10
   attackRange: 3
